@@ -31,11 +31,3 @@ class PossibleChar:
     # end constructor
 
 # end class
-
-
-
-
-
-
-
-

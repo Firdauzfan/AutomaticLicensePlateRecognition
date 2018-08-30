@@ -205,8 +205,10 @@ def main():
                     insertdata= updatetime(numlicense)
                     if check(numlicense):
                         ts = time.time()
-                        timestamp = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')
-                        namefile = "hasil/"+ license[VERIF-1] + timestamp + ".png"
+                        timestamp = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d')
+                        timestamp2 = datetime.datetime.fromtimestamp(ts).strftime('%H:%M:%S')
+
+                        namefile = "/var/www/html/MonitoringDashboard/hasil_parksystem/"+ license[VERIF-1] + timestamp + timestamp2 + ".png"
                         cv2.imwrite(namefile, imgOriginalScene)
             count = 0
 
@@ -265,8 +267,8 @@ def main():
         #drawRedRectangleAroundPlate(imgOriginalScene, imgOriginalScene)
 
         #cv2.rectangle(imgOriginalScene,((imgOriginalScene.shape[1]/2-230),(imgOriginalScene.shape[0]/2-80)),((imgOriginalScene.shape[1]/2+230),(imgOriginalScene.shape[0]/2+80)),SCALAR_GREEN,3)
-        cv2.rectangle(imgOriginalScene,((int(imgOriginalScene.shape[1]/2-400)),(int(imgOriginalScene.shape[0]/2-200))),((int(imgOriginalScene.shape[1]/2+400)),(int(imgOriginalScene.shape[0]/2+200))),SCALAR_GREEN,3)
-
+        #cv2.rectangle(imgOriginalScene,((int(imgOriginalScene.shape[1]/2-400)),(int(imgOriginalScene.shape[0]/2-200))),((int(imgOriginalScene.shape[1]/2+400)),(int(imgOriginalScene.shape[0]/2+200))),SCALAR_GREEN,3)
+        cv2.rectangle(imgOriginalScene,((int(imgOriginalScene.shape[1]/2-230)),(int(imgOriginalScene.shape[0]/2-80))),((int(imgOriginalScene.shape[1]/2+230)),(int(imgOriginalScene.shape[0]/2+80))),SCALAR_GREEN,3)
 
 
 
