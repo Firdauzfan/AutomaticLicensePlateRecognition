@@ -334,5 +334,5 @@ def recognizeCharsInPlate(imgThresh, listOfMatchingChars):
 
     # end for
 
-    return strChars
+    return strChars.upper()
 # end function

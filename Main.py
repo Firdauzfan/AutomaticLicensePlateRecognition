@@ -69,7 +69,7 @@ def main():
         loop = False
     else:
         #camera = cv2.VideoCapture("rtsp://192.168.1.10:554/user=admin&password=&channel=1&stream=0.sdp?")
-        #camera = cv2.VideoCapture("rtsp://admin:gspe12345@192.168.0.23:554/PSIA/streaming/channels/301")
+        # camera = cv2.VideoCapture("rtsp://admin:gspe12345@192.168.0.26:554/PSIA/streaming/channels/301")
         camera = cv2.VideoCapture(0)
         #camera = cv2.VideoCapture(0)
         loop = True
@@ -104,6 +104,7 @@ def main():
         imgOriginalScene, licenses = searching(imgOriginalScene,loop)
 
         # only save 5 same license each time
+
         license[count+1] = licenses
         nums = license[VERIF-1]
         if (license[count] == license[count+1]):
