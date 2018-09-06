@@ -19,6 +19,9 @@ import collections
 import DetectChars
 import DetectPlates
 import PossiblePlate
+import paho.mqtt.client as paho
+import time
+
 from imutils.video import WebcamVideoStream
 from database import data,check,updatetime
 
@@ -210,6 +213,12 @@ def main():
 
                         namefile = "/var/www/html/MonitoringDashboard/hasil_parksystem/"+ license[VERIF-1] + timestamp + timestamp2 + ".png"
                         cv2.imwrite(namefile, imgOriginalScene)
+
+                        broker="192.168.8.120"
+                        port=1883
+                        client1= paho.Client("control1")                           #create client object
+                        client1.connect(broker,port)                                 #establish connection
+                        ret= client1.publish("xiaomi/to/write",'{"cmd": "write",  "model": "plug",  "sid": "158d0002365abb",  "data": {"status": "on"}}')
             count = 0
 
         #determine plate regions
