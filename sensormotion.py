@@ -19,35 +19,24 @@ client.connect("192.168.8.120", 1883, 60)
 # while True:
 #    #print(val)
 
-count=0
+#    time.sleep(0.2)
+val = [0,0]
 while True:
-    if  GPIO.input(17):
-        print(GPIO.input(17))
-        pass
-    else:
-        continue
-        if GPIO.input(17):
-            count+=1
-            if count>=30:
-                client.publish("xiaomi/to/write",'{"cmd": "write",  "model": "plug",  "sid": "158d0002365abb",  "data": {"status": "off"}}', qos=0)
-
-# #    time.sleep(0.2)
-# val = [0,0]
-# while True:
-#     val[0] = GPIO.input(17)
-#     if val[0] == 1:
-#         if val[1] == val[0]:
-#             pass
-#         else:
-#             client.publish("xiaomi/to/write",'{"cmd": "write",  "model": "plug",  "sid": "158d0002365abb",  "data": {"status": "off"}}', qos=0)
-#     elif val[0] == 0:
-#         if val[1] == val[0]:
-#             pass
-#         else:
-#             client.publish("xiaomi/to/write",'{"cmd": "write",  "model": "plug",  "sid": "158d0002365abb",  "data": {"status": "on"}}', qos=0)
-#     print(GPIO.input(17))
-#     val[1]=val[0]
-#     time.sleep(0.2)
+    val[0] = GPIO.input(17)
+    if val[0] == 1:
+        if val[1] == val[0]:
+            pass
+        else:
+            client.publish("xiaomi/to/write",'{"cmd": "write",  "model": "plug",  "sid": "158d0002365abb",  "data": {"status": "off"}}', qos=0)
+    elif val[0] == 0:
+        if val[1] == val[0]:
+            pass
+        else:
+            # client.publish("xiaomi/to/write",'{"cmd": "write",  "model": "plug",  "sid": "158d0002365abb",  "data": {"status": "on"}}', qos=0)
+            pass
+    print(GPIO.input(17))
+    val[1]=val[0]
+    time.sleep(0.2)
 
 #
 # try:
