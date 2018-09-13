@@ -205,7 +205,7 @@ def main():
                     #print("A new license plate read from image = " + license[VERIF-1] + "\n")
                     print("A new license plate read from image = " + plat + "\n")
                     #cv2.imshow(license[VERIF-1], imgOriginalScene)
-                    cv2.imshow(plat, imgOriginalScene)
+                    # cv2.imshow(plat, imgOriginalScene)
                     insertdata= data(numlicense)
                     if check(numlicense):
                         ts = time.time()

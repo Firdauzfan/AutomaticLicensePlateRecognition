@@ -5,6 +5,15 @@ import numpy as np
 import math
 import random
 
+from keras.models import Sequential
+from keras.layers.core import Dense, Dropout, Flatten
+from keras.layers.convolutional import Conv2D
+from keras.optimizers import Adam
+from keras.layers.pooling import MaxPooling2D
+from keras.utils import to_categorical
+from keras.models import load_model
+from keras.optimizers import RMSprop
+
 import Main
 import Preprocess
 import PossibleChar
@@ -40,6 +49,16 @@ RESIZED_CHAR_IMAGE_WIDTH = 20
 RESIZED_CHAR_IMAGE_HEIGHT = 30
 
 MIN_CONTOUR_AREA = 100
+
+
+###################################################################################################
+model = load_model('New_model/char-reg.h5')
+def loadCNNClassifier():
+    model.compile(optimizer = RMSprop(lr=0.001,rho=0.9,epsilon=1e-08,decay=0.005), loss = 'categorical_crossentropy', metrics = ['accuracy'])
+    return True
+
+###################################################################################################
+
 
 ###################################################################################################
 def loadKNNDataAndTrainKNN():
