@@ -68,6 +68,7 @@ def main():
 
             cv2.imshow("imgROI", imgROI)                    # show cropped out char for reference
             cv2.imshow("imgROIResized", imgROIResized)      # show resized image for reference
+            cv2.imwrite("tes.png",imgROIResized)
             cv2.imshow("training_numbers.png", imgTrainingNumbers)      # show training numbers image, this will now have red rectangles drawn on it
 
             intChar = cv2.waitKey(0)                     # get key press

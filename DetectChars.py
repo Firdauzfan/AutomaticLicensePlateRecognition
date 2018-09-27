@@ -52,15 +52,6 @@ MIN_CONTOUR_AREA = 100
 
 
 ###################################################################################################
-model = load_model('New_model/char-reg.h5')
-def loadCNNClassifier():
-    model.compile(optimizer = RMSprop(lr=0.001,rho=0.9,epsilon=1e-08,decay=0.005), loss = 'categorical_crossentropy', metrics = ['accuracy'])
-    return True
-
-###################################################################################################
-
-
-###################################################################################################
 def loadKNNDataAndTrainKNN():
     allContoursWithData = []                # declare empty lists,
     validContoursWithData = []              # we will fill these shortly

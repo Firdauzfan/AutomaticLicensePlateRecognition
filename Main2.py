@@ -211,9 +211,11 @@ def main():
                         timestamp = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d')
                         timestamp2 = datetime.datetime.fromtimestamp(ts).strftime('%H:%M:%S')
 
+                        #Ganti Path sesuai dengan laptop masing2 heheh
                         namefile = "/var/www/html/MonitoringDashboard/hasil_parksystem/"+ license[VERIF-1] + timestamp + timestamp2 + ".png"
                         cv2.imwrite(namefile, imgOriginalScene)
 
+                        #Hapus bagian ini untuk tidak menggunakan sensor dan mengirim mqtt
                         broker="192.168.8.120"
                         port=1883
                         client1= paho.Client("control1")                           #create client object
