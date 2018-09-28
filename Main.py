@@ -217,11 +217,11 @@ def main():
                         cv2.imwrite(namefile, imgOriginalScene)
 
                         #Hapus bagian ini untuk tidak menggunakan sensor dan mengirim mqtt
-                        broker="192.168.8.120"
-                        port=1883
-                        client1= paho.Client("control1")                           #create client object
-                        client1.connect(broker,port)                                 #establish connection
-                        ret= client1.publish("xiaomi/to/write",'{"cmd": "write",  "model": "plug",  "sid": "158d0002365abb",  "data": {"status": "on"}}')
+                        #broker="192.168.8.120"
+                        #port=1883
+                        #client1= paho.Client("control1")                           #create client object
+                        #client1.connect(broker,port)                                 #establish connection
+                        #ret= client1.publish("xiaomi/to/write",'{"cmd": "write",  "model": "plug",  "sid": "158d0002365abb",  "data": {"status": "on"}}')
             count = 0
 
         #determine plate regions

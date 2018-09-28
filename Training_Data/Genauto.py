@@ -5,6 +5,7 @@ from skimage.io import imread
 import numpy as np
 import cv2
 import os
+import time
 
 
 # module level variables ##########################################################################
@@ -35,15 +36,31 @@ def main():
                 x+=1
         for each in range(x):
             #training_data[1] is for 10X20 training data images
-            img_details = imread(training_dataset_dir+'/'+each_letter+'/'+each_letter+'_'+str(each)+'.png', as_grey=True)
+            img_details = cv2.imread(training_dataset_dir+'/'+each_letter+'/'+each_letter+'_'+str(each)+'.png')
             imgROIResized = cv2.resize(img_details, (RESIZED_IMAGE_WIDTH, RESIZED_IMAGE_HEIGHT))
+            imgGray = cv2.cvtColor(imgROIResized, cv2.COLOR_BGR2GRAY)          # get grayscale image
+            imgBlurred = cv2.GaussianBlur(imgGray, (5,5), 0)                        # blur
+
+                                                                # filter image from grayscale to black and white
+            imgThresh = cv2.adaptiveThreshold(imgBlurred,                           # input image
+                                              255,                                  # make pixels that pass the threshold full white
+                                              cv2.ADAPTIVE_THRESH_GAUSSIAN_C,       # use gaussian rather than mean, seems to give better results
+                                              cv2.THRESH_BINARY_INV,                # invert so foreground will be white, background will be black
+                                              11,                                   # size of a pixel neighborhood used to calculate threshold value
+                                              2)                                    # constant subtracted from the mean or weighted mean
+
+
+            #cv2.imwrite('2_%s.png' %each,imgThresh)
+            #cv2.imwrite('1_%s.png' %each,img_details)
+            #cv2.imshow("imgROIResized", imgROIResized)
 
             print("%s %s" %(each_letter,each))
 
             intLetter= ord(each_letter)
             intClassifications.append(intLetter)
-            npaFlattenedImage = imgROIResized.reshape((1, RESIZED_IMAGE_WIDTH * RESIZED_IMAGE_HEIGHT))  # flatten image to 1d numpy array so we can write to file later
+            npaFlattenedImage = imgThresh.reshape((1, RESIZED_IMAGE_WIDTH * RESIZED_IMAGE_HEIGHT))  # flatten image to 1d numpy array so we can write to file later
             npaFlattenedImages = np.append(npaFlattenedImages, npaFlattenedImage, 0)
+            time.sleep(1)
 
     fltClassifications = np.array(intClassifications, np.float32)                   # convert classifications list of ints to numpy array of floats
 
