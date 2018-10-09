@@ -1,12 +1,11 @@
 import RPi.GPIO as GPIO
-import paho.mqtt.client as mqtt
+import paho.mqtt.client as paho
 import time
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(17, GPIO.IN)
 GPIO.setup(18, GPIO.IN)
-client=mqtt.Client()
-client.connect("192.168.8.120", 1883, 60)
+
 #val = GPIO.input(17)
 #client.publish("xiaomi/to/write",'{"cmd": "write",  "model": "plug",  "sid": "158d0002365abb",  "data": {"status": "off"}}', qos=0)
 # def my_callback(channel):
@@ -22,19 +21,24 @@ client.connect("192.168.8.120", 1883, 60)
 #    time.sleep(0.2)
 val = [0,0]
 while True:
-    val[0] = GPIO.input(17)
+    val[0] = GPIO.input(18)
     if val[0] == 1:
         if val[1] == val[0]:
             pass
         else:
-            client.publish("xiaomi/to/write",'{"cmd": "write",  "model": "plug",  "sid": "158d0002365abb",  "data": {"status": "off"}}', qos=0)
+            broker="192.168.1.151"
+            port=1883
+            client1= paho.Client("control2")                           #create client object
+            client1.connect(broker,port)                                 #establish connection
+            client1.publish("alpr/mqtt","1")
+
     elif val[0] == 0:
         if val[1] == val[0]:
             pass
         else:
             # client.publish("xiaomi/to/write",'{"cmd": "write",  "model": "plug",  "sid": "158d0002365abb",  "data": {"status": "on"}}', qos=0)
             pass
-    print(GPIO.input(17))
+    print(GPIO.input(18))
     val[1]=val[0]
     time.sleep(0.2)
 

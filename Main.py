@@ -72,9 +72,8 @@ def main():
         loop = False
     else:
         #camera = cv2.VideoCapture("rtsp://192.168.1.10:554/user=admin&password=&channel=1&stream=0.sdp?")
-        # camera = cv2.VideoCapture("rtsp://admin:gspe12345@192.168.0.26:554/PSIA/streaming/channels/301")
+        #camera = cv2.VideoCapture("rtsp://admin:gspe12345@192.168.0.26:554/PSIA/streaming/channels/301")
         camera = cv2.VideoCapture(0)
-        #camera = cv2.VideoCapture(0)
         loop = True
 
     # add knn library for detect chars
@@ -222,6 +221,11 @@ def main():
                         #client1= paho.Client("control1")                           #create client object
                         #client1.connect(broker,port)                                 #establish connection
                         #ret= client1.publish("xiaomi/to/write",'{"cmd": "write",  "model": "plug",  "sid": "158d0002365abb",  "data": {"status": "on"}}')
+                        broker="192.168.1.151"
+                        port=1883
+                        client1= paho.Client("control1")                           #create client object
+                        client1.connect(broker,port)                                 #establish connection
+                        client1.publish("alpr/mqtt","0")
             count = 0
 
         #determine plate regions
@@ -280,8 +284,6 @@ def main():
 
         #cv2.rectangle(imgOriginalScene,((imgOriginalScene.shape[1]/2-230),(imgOriginalScene.shape[0]/2-80)),((imgOriginalScene.shape[1]/2+230),(imgOriginalScene.shape[0]/2+80)),SCALAR_GREEN,3)
         cv2.rectangle(imgOriginalScene,((int(imgOriginalScene.shape[1]/2-230)),(int(imgOriginalScene.shape[0]/2-80))),((int(imgOriginalScene.shape[1]/2+230)),(int(imgOriginalScene.shape[0]/2+80))),SCALAR_GREEN,3)
-
-
 
 
         cv2.imshow("imgOriginalScene", imgOriginalScene)
