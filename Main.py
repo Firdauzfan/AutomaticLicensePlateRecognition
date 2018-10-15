@@ -226,6 +226,7 @@ def main():
                         client1= paho.Client("control1")                           #create client object
                         client1.connect(broker,port)                                 #establish connection
                         client1.publish("alpr/mqtt","0")
+                        os.system('spd-say "Welcome to Graha Sumber Prima Elektronik"')
             count = 0
 
         #determine plate regions
