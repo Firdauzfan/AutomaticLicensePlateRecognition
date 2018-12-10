@@ -71,9 +71,10 @@ def main():
             print("   Please check again the path of image or argument !")
         loop = False
     else:
-        #camera = cv2.VideoCapture("rtsp://192.168.1.10:554/user=admin&password=&channel=1&stream=0.sdp?")
+        #camera = cv2.VideoCapture("rtsp://admin:gspe12345@192.168.0.159:554/PSIA/streaming/channels/101")
+        camera = cv2.VideoCapture("rtsp://192.168.0.10:554/user=admin&password=&channel=1&stream=0.sdp?")
         #camera = cv2.VideoCapture("rtsp://admin:gspe12345@192.168.0.26:554/PSIA/streaming/channels/301")
-        camera = cv2.VideoCapture(0)
+        #camera = cv2.VideoCapture(0)
         loop = True
 
     # add knn library for detect chars
@@ -99,7 +100,7 @@ def main():
         if args.get("video") and not grabbed:
             break
         # resize the frame and convert it to grayscale
-        imgOriginalScene  = imutils.resize(frame, width = 640)
+        imgOriginalScene  = imutils.resize(frame)
         imgGrayscale, imgThresh = pp.preprocess(imgOriginalScene)
         cv2.imshow("threshold", imgThresh)
         #imgOriginalScene = imutils.transform (imgOriginalScene)
@@ -221,24 +222,24 @@ def main():
                         #client1= paho.Client("control1")                           #create client object
                         #client1.connect(broker,port)                                 #establish connection
                         #ret= client1.publish("xiaomi/to/write",'{"cmd": "write",  "model": "plug",  "sid": "158d0002365abb",  "data": {"status": "on"}}')
-                        broker="192.168.1.151"
-                        port=1883
-                        client1= paho.Client("control1")                           #create client object
-                        client1.connect(broker,port)                                 #establish connection
-                        client1.publish("alpr/mqtt","0")
-                        os.system('spd-say "Welcome to Graha Sumber Prima Elektronik"')
+                        # broker="192.168.1.151"
+                        # port=1883
+                        # client1= paho.Client("control1")                           #create client object
+                        # client1.connect(broker,port)                                 #establish connection
+                        # client1.publish("alpr/mqtt","0")
+                        # os.system('spd-say "Welcome to Graha Sumber Prima Elektronik"')
             count = 0
 
         #determine plate regions
 
 
 
-        global plateRegion
-        plateRegion = ""
-        plateDic = {'B':"Jakarta", 'D':"Bandung", 'L':"Surabaya", 'A':"Banten", 'E':"Cirebon", 'G':"Pekalongan", 'H':"Semarang"}
-        for i, j in plateDic.items():
-            if (plat[0] == i):
-                plateRegion = j
+        # global plateRegion
+        # plateRegion = ""
+        # plateDic = {'B':"Jakarta", 'D':"Bandung", 'L':"Surabaya", 'A':"Banten", 'E':"Cirebon", 'G':"Pekalongan", 'H':"Semarang"}
+        # for i, j in plateDic.items():
+        #     if (plat[0] == i):
+        #         plateRegion = j
 
         #and nums[0] >= 'A' and nums[0] <= 'Z' and nums[-1] >= 'A' and nums[-1] <= 'Z'
 
@@ -307,7 +308,7 @@ def main():
 
     # For image only
     if (loop == False):
-        imgOriginalScene  = imutils.resize(imgOriginalScene, width = 850)
+        imgOriginalScene  = imutils.resize(imgOriginalScene, width = 2000)
         cv2.imshow("original",imgOriginalScene)
         imgGrayscale, imgThresh = pp.preprocess(imgOriginalScene)
         cv2.imshow("threshold",imgThresh)
